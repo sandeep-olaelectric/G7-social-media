@@ -1,12 +1,14 @@
 package com.example.userapi.entities;
 
-import org.springframework.data.annotation.Id;
+//import org.springframework.data.annotation.Id;
 import java.util.*;
 
+
 public class User {
-	@Id
-	private String UserName;
+
+
 	private String Email;
+	private String UserName;
 	private String Password;
 	private String Name;
 	private String Gender;
