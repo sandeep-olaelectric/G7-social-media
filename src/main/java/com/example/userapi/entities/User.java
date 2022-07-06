@@ -3,7 +3,10 @@ package com.example.userapi.entities;
 //import org.springframework.data.annotation.Id;
 import java.util.*;
 
+import org.springframework.data.mongodb.core.mapping.Document;
 
+
+@Document(collection = "users")
 public class User {
 
 
