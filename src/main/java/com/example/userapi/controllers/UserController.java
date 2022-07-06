@@ -83,6 +83,7 @@ public class UserController {
 		user.setPassword(signupRequest.getPassword());
 		
 		userRepository.save(user);
+		message.put("flag", "true");
 		message.put("message","sign-up successful" );
 		return message;
 	}
@@ -100,20 +101,7 @@ public class UserController {
 	public Map<String,String> loginUser(@RequestBody LoginRequest loginRequest) {
 		
 		HashMap<String,String> message = new HashMap<>();
-		/*
-		 * message.put("flag", "false"); message.put("message", "message1");
-		 * message.put("email", loginRequest.getEmail()); message.put("password",
-		 * loginRequest.getPassword());
-		 */
-		
-		// create jwt and send it to user.
-		
-		/*String email = loginRequest.getEmail();
-		String password = loginRequest.getPassword();
-		
-		MessageResponse message = new MessageResponse(email+" "+ password);
-		*/
-		
+				
 		// validating fields in login request.
 		if(loginRequest.getEmail()==null) {
 			message.put("flag", "false");
@@ -121,9 +109,41 @@ public class UserController {
 			return message;
 		}
 		
+		if(loginRequest.getPassword()==null) {
+			message.put("flag", "false");
+			message.put("message","password field is empty");
+			return message;
+		}
+		
+		// validating email id whether user exists or not.
+		
+		List<User> emailUsers = userRepository.existsByEmail(loginRequest.getEmail());
+		 if(emailUsers.size()==0) {
+			 
+			 message.put("flag", "false");
+			 message.put("message", "Account doesn't exist with that email!");
+			 return message;
+		 }
+		
+		 //authenticating user with email & password.
+		 //System.out.println(emailUsers);
+		 System.out.println(loginRequest.getPassword());
+		 System.out.println(emailUsers.get(0).getPassword());
+		 
+		 
+		if(emailUsers.get(0).getPassword().equals(loginRequest.getPassword())) {
+			message.put("flag", "true");
+			message.put("message", "Login successful:)");
+			return message;
+		}
+		else {
+			message.put("flag", "false");
+			message.put("message", "Passwords doesn't match:(");
+			return message;
+
+		}
 		
 		
-		return message;
 	}
 
 }
