@@ -9,7 +9,7 @@ import org.springframework.data.mongodb.repository.Query;
 
 import com.example.userapi.entities.User;
 
-public interface UserRepository extends MongoRepository<User, Integer> {
+public interface UserRepository extends MongoRepository<User, String> {
 	
 	@Query("{'Email':?0}")
 	List<User> existsByEmail(String email);
