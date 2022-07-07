@@ -3,15 +3,17 @@ package com.example.userapi.entities;
 //import org.springframework.data.annotation.Id;
 import java.util.*;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
 @Document(collection = "users")
 public class User {
 
-
+	@Id
+	private String userId;
+	
 	private String email;
-	//private String Email;
 	private String userName;
 	private String Password;
 	private String Name;
@@ -24,7 +26,6 @@ public class User {
 	private List<String> Following;
 	private List<String> RequestList;
 	private List<String> PostId;
-	
 	public String getUserName() {
 		return userName;
 	}
@@ -105,7 +106,7 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [userName=" + userName + ", Email=" + email + ", Password=" + Password + ", Name=" + Name
+		return "User [UserName=" + userName + ", email=" + email + ", Password=" + Password + ", Name=" + Name
 				+ ", Gender=" + Gender + ", Age=" + Age + ", Bio=" + Bio + ", ProfilePicLink=" + ProfilePicLink
 				+ ", DOB=" + DOB + ", Followers=" + Followers + ", Following=" + Following + ", RequestList="
 				+ RequestList + ", PostId=" + PostId + "]";

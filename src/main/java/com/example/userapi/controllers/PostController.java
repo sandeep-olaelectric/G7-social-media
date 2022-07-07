@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.userapi.entities.EditPostRequest;
@@ -21,6 +22,7 @@ import com.example.userapi.repositories.PostRepository;
 import com.example.userapi.repositories.UserRepository;
 
 @RestController
+@RequestMapping("/api/posts/")
 public class PostController {
 	
 	@Autowired
@@ -82,6 +84,11 @@ public class PostController {
 		return message;
 	}
 	
-
+	//feed
+	
+	@GetMapping("/feed")
+	public List<Post> getFeed(){
+		return postRepository.findAll();
+	}
 	
 }

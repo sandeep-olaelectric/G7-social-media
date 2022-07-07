@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.userapi.entities.LoginRequest;
@@ -21,6 +22,7 @@ import com.example.userapi.repositories.UserRepository;
 
 
 @RestController
+@RequestMapping("/api/users/")
 public class UserController {
 	
 	@Autowired
@@ -62,14 +64,14 @@ public class UserController {
 		
 		
 		 if(userRepository.existsByEmail(signupRequest.getEmail()).size()>0) {
-			 System.out.println(userRepository.existsByEmail(signupRequest.getEmail()));
+			 //System.out.println(userRepository.existsByEmail(signupRequest.getEmail()));
 			 message.put("flag", "false");
 			 message.put("message", "Account already exists with that email!");
 			 return message;
 		 }
 		// validating email id whether user name is already in use.	
 		 if(userRepository.existsByUsername(signupRequest.getUsername()).size()>0) {
-			 System.out.println(userRepository.existsByUsername(signupRequest.getUsername()));
+			 //System.out.println(userRepository.existsByUsername(signupRequest.getUsername()));
 			 message.put("flag", "false");
 			 message.put("message", "Account already exists with that user name!");
 			 return message;
@@ -179,5 +181,19 @@ public class UserController {
 		message.put("message", "User updated succesfully!");
 		return message;
 	}
+	
+	
+	//fetch users
+	@GetMapping("/search")
+	public List<User> searchUsers(@RequestBody String email){
+		System.out.println(userRepository.existsByEmail(email));
+		return userRepository.existsByEmail(email);
+		/*
+		 * System.out.println(userRepository.searchUser(searchString)); return
+		 * userRepository.searchUser(searchString);
+		 */
+		
+	}
+	
 
 }

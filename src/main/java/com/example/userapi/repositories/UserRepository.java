@@ -21,4 +21,6 @@ public interface UserRepository extends MongoRepository<User, String> {
 	@Query("updateOne({'Email':?0},{$set:{UserName:?1,Name:?2,Password:?3,Gender:?4,Bio:?5,DOB:?6}})")
 	void updateUser(String email, String username, String name, String password, String gender,String bio, Date dob);
 	
+	@Query("{'UserName':?0}")
+	List<User> searchUser(String searchString);
 }
