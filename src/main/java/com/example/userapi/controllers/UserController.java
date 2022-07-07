@@ -4,13 +4,17 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.Query;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.userapi.entities.LoginRequest;
 import com.example.userapi.entities.MessageResponse;
+import com.example.userapi.entities.Post;
 import com.example.userapi.entities.SignupRequest;
 import com.example.userapi.entities.User;
 import com.example.userapi.repositories.UserRepository;
@@ -144,6 +148,36 @@ public class UserController {
 		}
 		
 		
+	}
+	
+	
+	// delete user
+	@DeleteMapping("/delete-user/{email}")
+	public Map<String,String> DeleteUser(@PathVariable String email){
+		HashMap<String,String> message = new HashMap<>();
+	
+		userRepository.deleteById(email);
+		message.put("flag","true");
+		message.put("message", "User deleted succesfully!");
+		
+		return message;
+	}
+	
+	//edit post
+	@PutMapping("/edit-user")
+	public Map<String,String> EditUser(@RequestBody User updatedUser){
+		HashMap<String,String> message = new HashMap<>();
+		
+		//Optional<Post> oldPost = postRepository.findById(newPost.getPostId());
+		
+		
+		
+		userRepository.updateUser(updatedUser.getEmail(),updatedUser.getUserName(),updatedUser.getName(),updatedUser.getPassword(),updatedUser.getGender(),
+				updatedUser.getBio(),updatedUser.getDOB());
+		
+		message.put("flag","true");
+		message.put("message", "User updated succesfully!");
+		return message;
 	}
 
 }
