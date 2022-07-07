@@ -10,8 +10,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
 
 
-	private String Email;
-	private String UserName;
+	private String email;
+	//private String Email;
+	private String userName;
 	private String Password;
 	private String Name;
 	private String Gender;
@@ -23,17 +24,18 @@ public class User {
 	private List<String> Following;
 	private List<String> RequestList;
 	private List<String> PostId;
+	
 	public String getUserName() {
-		return UserName;
+		return userName;
 	}
 	public void setUserName(String userName) {
-		UserName = userName;
+		this.userName = userName;
 	}
 	public String getEmail() {
-		return Email;
+		return email;
 	}
 	public void setEmail(String email) {
-		Email = email;
+		this.email = email;
 	}
 	public String getPassword() {
 		return Password;
@@ -103,7 +105,7 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [UserName=" + UserName + ", Email=" + Email + ", Password=" + Password + ", Name=" + Name
+		return "User [userName=" + userName + ", Email=" + email + ", Password=" + Password + ", Name=" + Name
 				+ ", Gender=" + Gender + ", Age=" + Age + ", Bio=" + Bio + ", ProfilePicLink=" + ProfilePicLink
 				+ ", DOB=" + DOB + ", Followers=" + Followers + ", Following=" + Following + ", RequestList="
 				+ RequestList + ", PostId=" + PostId + "]";
@@ -116,8 +118,8 @@ public class User {
 			String profilePicLink, Date dOB, List<String> followers, List<String> following, List<String> requestList,
 			List<String> postId) {
 		super();
-		UserName = userName;
-		Email = email;
+		this.userName = userName;
+		this.email = email;
 		Password = password;
 		Name = name;
 		Gender = gender;
