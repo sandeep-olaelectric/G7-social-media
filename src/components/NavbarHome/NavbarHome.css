@@ -1,0 +1,24 @@
+
+.navbar{
+    padding: auto;
+}
+
+
+ .navbar-brand{
+    margin-left: 100px;
+    padding-right:200px ;
+} 
+
+.form-inline{
+    padding-right: 230px;
+}
+.dropdown-menu{
+    text-align: end;
+}
+.nav-item{
+    padding-left: 30px;
+}
+ .home{
+    text-align: center ;
+    
+} 

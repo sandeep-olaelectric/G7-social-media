@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+import {BrowserRouter as Router , Routes,Route} from 'react-router-dom';
 import './App.css';
+import {useState} from 'react';
+import Login from './components/Login/Login';
+import Signup from './components/Signup/Signup';
+import HomePage from './components/HomePage/HomePage';
+import UpdatePost from './components/UpdatePost/UpdatePost';
+import NavbarLogin from './components/NavbarLogin/NavbarLogin';
+import NavbarHome from './components/NavbarHome/NavbarHome';
+import UpdateProfile from './components/UpdateProfile/UpdateProfile';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 
 function App() {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userdata,setuserdata]= useState({flag:false,userdata:null});
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        {!isLoggedIn && <NavbarLogin/>}
+        {isLoggedIn && < NavbarHome setIsLoggedIn={setIsLoggedIn} />}
+          <div >
+            <div >
+              <Routes>
+                <Route exact path="/" element={<Login setuserdata={setuserdata} setIsLoggedIn={setIsLoggedIn} />} />
+                <Route path="/sign-in" element={<Login setuserdata={setuserdata} setIsLoggedIn={setIsLoggedIn} />} />
+                <Route path="/sign-up" element={<Signup />} />  
+                <Route path="/home" element={<ProtectedRoute isLoggedIn={isLoggedIn}><HomePage userdata={userdata}/></ProtectedRoute>} />
+                <Route path="/updatepost" element={<ProtectedRoute isLoggedIn={isLoggedIn}><UpdatePost userdata={userdata}/></ProtectedRoute>} />
+                <Route path="/updateprofile" element={<ProtectedRoute isLoggedIn={isLoggedIn}><UpdateProfile userdata={userdata}  /></ProtectedRoute>} />
+              </Routes>
+            </div>
+          </div>
+      </div>
+      
+     
+    </Router>  
   );
 }
 

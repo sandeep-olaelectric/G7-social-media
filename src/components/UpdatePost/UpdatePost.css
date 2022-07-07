@@ -1,0 +1,15 @@
+.updatepost{
+    color: red;
+    
+    text-align: center;
+    font-size: larger;
+}
+
+.uploadpostbutton{
+    position: relative;
+    align-items: center;
+    text-align: center;
+    color: red;
+    top:100px;
+    left: 160px;
+}
