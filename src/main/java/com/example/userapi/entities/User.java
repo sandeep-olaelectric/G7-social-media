@@ -14,6 +14,12 @@ public class User {
 	private String userId;
 	
 	private String email;
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	private String userName;
 	private String Password;
 	private String Name;
@@ -26,6 +32,14 @@ public class User {
 	private List<String> Following;
 	private List<String> RequestList;
 	private List<String> PostId;
+	private Stack<String> Feed;
+	
+	public Stack<String> getFeed() {
+		return Feed;
+	}
+	public void setFeed(Stack<String> feed) {
+		Feed = feed;
+	}
 	public String getUserName() {
 		return userName;
 	}

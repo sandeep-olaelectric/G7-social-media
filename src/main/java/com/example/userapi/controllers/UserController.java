@@ -157,10 +157,24 @@ public class UserController {
 	@DeleteMapping("/delete-user/{email}")
 	public Map<String,String> DeleteUser(@PathVariable String email){
 		HashMap<String,String> message = new HashMap<>();
+		
+		List<User> users = userRepository.existsByEmail(email);
+		if(users.size()==0) {
+			message.put("flag", "false");
+			message.put("message", "No such user exists with given email");
+			return message;
+			
+		}
 	
-		userRepository.deleteById(email);
-		message.put("flag","true");
-		message.put("message", "User deleted succesfully!");
+		if(users.size()!=0) {
+			
+			User user = users.get(0);
+			userRepository.deleteById(user.getUserId());
+			message.put("flag", "true");
+			message.put("message", "User deleted successfully!");
+			return message;
+			
+		}
 		
 		return message;
 	}
@@ -173,9 +187,50 @@ public class UserController {
 		//Optional<Post> oldPost = postRepository.findById(newPost.getPostId());
 		
 		
+//		userRepository.updateUser(updatedUser.getEmail(),updatedUser.getUserName(),updatedUser.getName(),updatedUser.getPassword(),
+//				updatedUser.getBio());
 		
-		userRepository.updateUser(updatedUser.getEmail(),updatedUser.getUserName(),updatedUser.getName(),updatedUser.getPassword(),updatedUser.getGender(),
-				updatedUser.getBio(),updatedUser.getDOB());
+		//System.out.println(updatedUser.getUserName());
+		
+		if(updatedUser.getUserName()!=null && userRepository.existsByUsername(updatedUser.getUserName()).size()>0) {
+			 //System.out.println(userRepository.existsByUsername(signupRequest.getUsername()));
+			 message.put("flag", "false");
+			 message.put("message", "Account already exists with that user name!");
+			 return message;
+		 }
+		
+		List<User> users = userRepository.existsByEmail(updatedUser.getEmail());
+		updatedUser.setUserId(users.get(0).getUserId());
+		User prevUser = users.get(0);
+		
+		
+		
+		if(updatedUser.getAge()==0) updatedUser.setAge(users.get(0).getAge());
+		
+		if(updatedUser.getBio()==null) updatedUser.setBio(users.get(0).getBio());
+		
+		if(updatedUser.getDOB()==null) updatedUser.setDOB(prevUser.getDOB());
+		
+		updatedUser.setFollowers(prevUser.getFollowers());
+		updatedUser.setFollowing(prevUser.getFollowing());
+		
+		if(updatedUser.getPassword()==null) updatedUser.setPassword(prevUser.getPassword());
+		
+		if(updatedUser.getName()==null) updatedUser.setName(prevUser.getName());
+		
+		if(updatedUser.getUserName()==null) updatedUser.setUserName(prevUser.getUserName());
+		
+		if(updatedUser.getGender()==null) updatedUser.setGender(prevUser.getGender());
+		updatedUser.setPostId(prevUser.getPostId());
+		
+		if(updatedUser.getProfilePicLink()==null) updatedUser.setProfilePicLink(prevUser.getProfilePicLink());
+		
+		updatedUser.setRequestList(prevUser.getRequestList());
+		updatedUser.setFeed(prevUser.getFeed());
+		
+		
+		
+		userRepository.save(updatedUser);
 		
 		message.put("flag","true");
 		message.put("message", "User updated succesfully!");

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Stack;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.Query;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.userapi.entities.EditPostRequest;
 import com.example.userapi.entities.Post;
+import com.example.userapi.entities.User;
 import com.example.userapi.repositories.PostRepository;
 import com.example.userapi.repositories.UserRepository;
 
@@ -42,6 +44,13 @@ public class PostController {
 			message.put("message", "Post-Image can't be empty!");
 		}
 		
+		List<User> users = userRepository.existsByEmail(post.getAuthorEmail());
+		List<String> followers = users.get(0).getFollowers();
+		for(int i=0;i<followers.size();i++)
+		{
+			List<User> followerEmail = userRepository.existsByEmail(followers.get(i));
+			followerEmail.get(0).getFeed().push(post.getPostId());
+		}
 		
 		postRepository.save(post);
 		message.put("flag","true");
@@ -61,7 +70,24 @@ public class PostController {
 	@DeleteMapping("/delete-post/{postId}")
 	public Map<String,String> DeletePost(@PathVariable String postId){
 		HashMap<String,String> message = new HashMap<>();
-	
+		Post post = postRepository.findById(postId).get();
+		
+		List<User> users = userRepository.existsByEmail(post.getAuthorEmail());
+		List<String> followers = users.get(0).getFollowers();
+		
+		//Get into the user's followers list and delete postid for each follower's feed
+		for(int i=0;i<followers.size();i++)
+		{
+			List<User> followerEmail = userRepository.existsByEmail(followers.get(i));
+			Stack<String> wastepostid = new Stack<>();
+			while(followerEmail.get(0).getFeed().peek()!=postId) {
+				wastepostid.push(followerEmail.get(0).getFeed().pop());
+			}
+			followerEmail.get(0).getFeed().pop();
+			while(!wastepostid.empty()) followerEmail.get(0).getFeed().push(wastepostid.pop());
+			
+		}
+		
 		postRepository.deleteById(postId);
 		message.put("flag","true");
 		message.put("message", "Post deleted succesfully!");
