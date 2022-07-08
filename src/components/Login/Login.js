@@ -28,13 +28,11 @@ export default function Login(props){
 
       let res=await fetch(url,options);
       let data = await res.json();
-      if(data.flag){
-        props.setIsLoggedIn(true);
-        navigate('/home');
-      }
-      else{
-        alert(data.message);
-      }
+      
+      props.setIsLoggedIn(true);
+      navigate('/home');
+      
+      
 
     }
 

@@ -61,9 +61,9 @@ export default function UpdatePost(props){
 
         let res=await fetch(url,options);
         let data = await res.json();
-        if(data.flag){
-            navigate('/home');
-        }
+        
+        navigate('/home');
+        
     }
 
     return(

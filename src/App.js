@@ -11,6 +11,7 @@ import UpdateProfile from './components/UpdateProfile/UpdateProfile';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import ViewFriends from './components/ViewFriends/ViewFriends';
 import ViewPosts from './components/ViewPosts/ViewPosts';
+import Popup from './components/Popup/Popup';
 
 
 

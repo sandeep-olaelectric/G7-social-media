@@ -5,6 +5,11 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Favorite from '@material-ui/icons/Favorite';
 // import CommentIcon from '@mui/icons-material/Comment';
 
+import 'reactjs-popup/dist/index.css';
+import Popup from './components/Popup/Popup';
+
+
+
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import {useEffect,useState} from 'react';
 
@@ -15,9 +20,9 @@ import { display } from '@mui/system';
 
 
 
-
 export default function HomePage(props){
-    
+    const [button,setButton]=useState(false);
+
     const [postdata,setpostdata] = useState({flag:false,postdata:null});
 
     const [likecount,setlikecount] = useState(98);
@@ -170,6 +175,21 @@ export default function HomePage(props){
 
                                     <p><b>Shiva </b>Instagram was born out of necessity- a need to provide a convenient and one-stop social media portal to all the people. <span id="points">...</span><span id="moreText"> This necessity was as personal to me as it was universal.This need combined with my passion forteaching resulted in GeeksforGeeks as we know today. My message to you, in our inaugural edition of Geeks Digest, would be that if you are looking for a problem to work on, you don’t need to look very far for it. All you should do is to look around yourself.</span></p>
                                     <button  onClick={toggleText} id="textButton"> Show More </button>
+                                    <br/>
+                                    {/* <Popup trigger={<button id="textButton">View all comments</button>} 
+                                    position="right center">
+                                    <div>Comments</div>
+                                    <button>Click here</button>
+                                    </Popup> */}
+                                    
+                                    <br/>
+
+
+                                    <Popup trigger={button} setTrigger={setButton}>
+
+                                    </Popup>
+
+                                    
                             </div>
 
                         

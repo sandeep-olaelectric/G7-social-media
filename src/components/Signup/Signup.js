@@ -29,14 +29,10 @@ export default function Signup(props){
 
     let res= await fetch(url,options);
     let data = await res.json();
-    if(data.flag)
-    {
+    
       navigate('/sign-in');
-    }
-    else
-    {
-      alert('signupfailed');
-    }
+    
+    
   }
 
 
