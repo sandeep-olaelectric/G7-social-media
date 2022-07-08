@@ -2,3 +2,42 @@
     position: relative;
     top: 70px;
 }
+#moreText {
+  
+
+    display: none;
+}
+
+#textButton{
+    background: none;
+  border: none;
+  padding: 0;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.likeButton
+{
+    background: none;
+    border: none;
+    padding: 0;
+    
+    cursor: pointer;
+    
+}
+
+.commentButton
+{
+    background: none;
+    border: none;
+    padding: 0;
+    
+    cursor: pointer;
+    
+}
+
+

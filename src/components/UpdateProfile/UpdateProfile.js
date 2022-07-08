@@ -1,7 +1,14 @@
 import './UpdateProfile.css'
-
+import {useNavigate} from 'react-router-dom';
 
 export default function UpdateProfile(props){
+
+    const navigate=useNavigate();
+    
+    const Handlesave = async(event)=>{
+        alert("profile Updated");
+        navigate('/home');
+    }
 
     return(
         <div>
@@ -62,7 +69,7 @@ export default function UpdateProfile(props){
                                 </div> 
                             </div>
                             <div class="mt-5 text-center">
-                                <button class="btn btn-primary profile-button" type="button">Save Profile</button>
+                                <button onClick={Handlesave} class="btn btn-primary profile-button" type="button">Save Profile</button>
                             </div> 
                         </div>
                     </div> 

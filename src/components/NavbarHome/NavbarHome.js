@@ -33,8 +33,8 @@ export default function NavbarHome(props){
                             </a>
                             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <Link to='/updateprofile' ><a className="dropdown-item" href="/updateprofile">Profile</a></Link>
-                                <a className="dropdown-item" href="#">View Posts</a>
-                                <a className="dropdown-item" href="#">Friends</a>
+                                <Link to='/viewposts'><a className="dropdown-item" href="/viewposts">View Posts</a></Link>
+                                <Link to='/viewfriends'><a className="dropdown-item" href="/viewfriends">Friends</a></Link>
 
                                 <div className="dropdown-divider" />
                                 <button onClick={HandleLogout}><a className="dropdown-item" href="#">Logout</a></button>
