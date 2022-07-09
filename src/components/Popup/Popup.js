@@ -1,23 +1,26 @@
 import React from "react";
 import './Popup.css';
 
+
+
+
 export default function Popup(props){
 
 
     return(props.trigger)?(
-        <div className="modal">
-            <button className="close" onClick={()=>{props.setTrigger(false)}}> &times; </button> 
+       <div className="popup">
+        <div className="popup-inner">
+            <button className="close-btn" onClick={()=> props.setTrigger(false)}>close</button>
             <div className="header"> 
-                Modal Title 
+                Comments
             </div> 
             <div className="content">
-                {' '} Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a nostrum. Dolorem, repellat quidem ut, minima sint vel eveniet quibusdam voluptates delectus doloremque, explicabo tempore dicta adipisci fugit amet dignissimos? <br /> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur sit commodi beatae optio voluptatum sed eius cumque, delectus saepe repudiandae explicabo nemo nam libero ad, doloribus, voluptas rem alias. Vitae? 
+                {' '}<b>somerandomuser</b> This is Random user comment<br /> <b>Otheruser</b> This is Other user comment
             </div> 
             <div className="actions"> 
-            <Popup trigger={<button className="button"> Trigger </button>} position="top center" nested > 
-                <span> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae magni omnis delectus nemo, maxime molestiae dolorem numquam mollitia, voluptate ea, accusamus excepturi deleniti ratione sapiente! Laudantium, aperiam doloribus. Odit, aut. </span>
-            </Popup> <button className="button" onClick={() => { console.log('modal closed '); close(); }} > close modal </button> 
             </div>
-        </div> 
+            { props.childern }
+        </div>
+       </div>
     ):"";
 }

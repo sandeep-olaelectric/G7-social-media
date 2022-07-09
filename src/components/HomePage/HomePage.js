@@ -6,8 +6,8 @@ import Favorite from '@material-ui/icons/Favorite';
 // import CommentIcon from '@mui/icons-material/Comment';
 
 import 'reactjs-popup/dist/index.css';
-import Popup from './components/Popup/Popup';
 
+import Popup from '../Popup/Popup';
 
 
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
@@ -142,6 +142,7 @@ export default function HomePage(props){
 
 
                             <div>
+                                
                                 <h6>Shiva</h6>
                                 <button onDoubleClick={increaselikecount} style={{border:0}}><img src="https://i.ibb.co/Sf2KMrz/lorem-FC5-QJp2qo-Pk-unsplash.jpg" alt="lorem-FC5-QJp2qo-Pk-unsplash" border="0" width={400} /></button> 
                                     <FormControlLabel
@@ -183,10 +184,13 @@ export default function HomePage(props){
                                     </Popup> */}
                                     
                                     <br/>
+                                    
 
+                                    <button onClick={()=>setButton(true)}>View Comments</button>
 
                                     <Popup trigger={button} setTrigger={setButton}>
-
+                                        <h3>my popup</h3>
+                                        <p>This is my button triggered popup</p>
                                     </Popup>
 
                                     
